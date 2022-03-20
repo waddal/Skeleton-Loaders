@@ -1,21 +1,29 @@
-import React from "react";
-import { Button } from "antd";
+import React, { useState } from "react";
+import { Switch } from "antd";
 import { useNavigate } from "react-router-dom";
+import Title from "../components/Title";
+import Card from "../components/Card";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const handleLoading = () => {
+    setLoading(!loading);
+  };
+
   return (
-    <>
-      <Button
-        type="primary"
-        block={true}
-        size="middle"
-        onClick={() => navigate("/posts")}
-      >
-        Posts
-      </Button>
-      <Button block={true}>Secondary</Button>
-    </>
+    <div className="Home">
+      <Switch
+        checkedChildren="loaded"
+        unCheckedChildren="loading"
+        onClick={handleLoading}
+      />
+      <h1>Skeleton Loaders</h1>
+      <Title loading={loading} />
+      <br />
+      <Card loading={loading} />
+    </div>
   );
 };
 
